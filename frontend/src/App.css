@@ -9,7 +9,46 @@
   --buttonBg: linear-gradient(98.63deg, #F582A8 0%, #D3BBDD 100%);
   --inputColor: rgba(40, 52, 62, 0.07);
   --photo: #A0E0E4;
-  --video: #ECE3F0;
-  --location: #D3BBDD;
---shedule: #F2E6D6;
+  --video: #f3a2ed;
+  --location: #cfaede;
+--schedule: #ddc09a;
+}
+
+.App{
+  overflow: hidden;
+  color: var(--black);
+  background: #f3f3f3;
+  padding: 1rem 1rem;
+}
+
+.blur{
+  position: absolute;
+  width: 22rem;
+  height: 14rem;
+  border-radius: 50%;
+  background-color: #c6f0fb;
+  filter: blur(75px);
+}
+
+.button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  background: var(--buttonBg);
+  transition: all 100ms ease-out;
+}
+
+.button:hover{
+  cursor: pointer;
+  color: var(--hotpink);
+  background: transparent;
+  /* border: 2px solid var(--hotpink); */
+  box-shadow: 0px 0px 0px 2px var(--hotpink) inset;
+}
+
+::-webkit-scrollbar{
+  display:none;
 }

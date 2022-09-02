@@ -8,7 +8,7 @@ export const createPost = async(req, res) => {
 
     try {
         await newPost.save()
-        res.status(200).json('Post created')
+        res.status(200).json(newPost)
     } catch (error) {
         res.status(500).json(error)
     }
@@ -65,14 +65,16 @@ export const likePost = async (req, res) => {
     const {userId} = req.body
 
     try {
-        const post = await PostModel.findById(postId)
+        let post = await PostModel.findById(postId)
 
-        if(!post.likes.includes(userId)) {
-            await post.updateOne({$push: {likes: userId}})
-            res.status(200).json('Post liked')
+        if(post.likes.includes(userId)) {
+            //await post.updateOne({$pull: {likes: userId}})
+            post = await PostModel.findOneAndUpdate({_id: postId}, {$pull: {likes: userId}}, {new: true})
+            res.status(200).json({post: post, message: "post unliked"})
         } else {
-            await post.updateOne({$pull: {likes: userId}})
-            res.status(200).json('Post unliked')
+            //await post.updateOne({$push: {likes: userId}})
+            post = await PostModel.findOneAndUpdate({_id: postId}, {$push: {likes: userId}}, {new: true})
+            res.status(200).json({post: post, message: "post liked"})
         }
     } catch (error) {
         res.status(500).json(error);

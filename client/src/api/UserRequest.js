@@ -1,0 +1,20 @@
+import axios from 'axios'
+
+const API = axios.create({baseURL: "http://localhost:8000"})
+
+API.interceptors.request.use((req)=>{
+    if(localStorage.getItem('profile')){
+        req.headers.Authorization = `Bearer ${JSON.parse(localStorage.getItem('profile')).token}`
+    }
+    return req
+})
+
+export const getUser = (userId) => API.get(`/user/${userId}`)
+
+export const updateUser = (userId, formData) => API.put(`/user/${userId}`, {currentUserId: userId, ...formData})
+
+export const getAllUsers = () => API.get('/user')
+
+export const followUser = (id, data) => API.put(`/user/${id}/follow`, {currentUserId: data._id, })
+
+export const unfollowUser = (id, data) => API.put(`/user/${id}/unfollow`, {currentUserId: data._id, })

@@ -3,7 +3,7 @@
 
 ### dotenv ###
 .env
-/public/images
+
 ### macOS ###
 # General
 .DS_Store

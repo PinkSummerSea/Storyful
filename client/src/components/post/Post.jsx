@@ -7,7 +7,7 @@ import {useSelector} from 'react-redux'
 import { useState } from 'react'
 import { likePost } from '../../api/PostRequest.js'
 import { useEffect } from 'react'
-
+import {UilLocationPoint} from "@iconscout/react-unicons";
 
 const Post = ({ data }) => {
   const { user } = useSelector((state) => state.authReducer.authData);
@@ -49,12 +49,23 @@ const Post = ({ data }) => {
       </span>
       <div className="detail">
         <span>
-          <b>{data.name} </b>
+          <b>{data.username}: </b>
         </span>
         <span>{data.desc}</span>
+      </div>
+      <div style={{position:'relative'}}>
+        <span style={{ color: "var(--location)",position:'relative', top:'5px' }}>
+          <UilLocationPoint />  
+        </span>
+        <span> {data.location}</span>
       </div>
     </div>
   );
 };
 
 export default Post;
+
+// <div className="option" style={{ color: "var(--location" }}>
+          //   <UilLocationPoint />
+          //   Location
+          // </div>

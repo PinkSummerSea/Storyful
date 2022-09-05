@@ -1,0 +1,13 @@
+.cluster {
+    color: #fff;
+    background: #6983e9;
+    border-radius: 50%;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mapboxgl-popup-close-button {
+    display: none;
+}

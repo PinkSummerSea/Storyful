@@ -1,5 +1,6 @@
 import * as PostApi from '../api/PostRequest.js'
 
+
 export const getTimelinePosts = (userId) =>  async(dispatch) => {
 
     dispatch({type: "GET_POSTS_START"})
@@ -13,4 +14,13 @@ export const getTimelinePosts = (userId) =>  async(dispatch) => {
     }
 }
 
-export default getTimelinePosts
+export const getAllPosts = () => async(dispatch) => {
+   
+    try {
+         const {data} = await PostApi.getAllPosts()
+         dispatch({type: 'ALL_POSTS_FETCHED', data: data})
+    } catch (error) {
+        console.log(error)
+        dispatch({type: "FETCH_ALL_POSTS_FAIL"})
+    }
+}

@@ -6,6 +6,8 @@ import Auth from "./pages/auth/Auth";
 import {Routes, Route, Navigate} from 'react-router-dom'
 import {useSelector} from 'react-redux'
 import Chat from "./pages/chat/Chat";
+import CityStoryMap from "./pages/cityStoryMap/CityStoryMap";
+import CityMap from "./pages/cityMap/CityMap";
 
 function App() {
 
@@ -20,6 +22,7 @@ function App() {
           <Route path='/auth' element={user? <Navigate to='../home'/>:<Auth />} />
           <Route path='/profile/:id' element={user? <Profile />:<Navigate to='../auth' />} />
           <Route path='/chat' element={user ? <Chat /> : <Navigate to='../auth' />} />
+          <Route path='/city_map' element={<CityMap />} />
         </Routes>
     </div>
   );

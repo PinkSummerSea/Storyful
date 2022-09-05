@@ -28,6 +28,16 @@
     outline: none;
 }
 
+.PostShare>div>textarea {
+    background-color: var(--inputColor);
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 17px;
+    border: none;
+    outline: none;
+    font-family: 'Inter', sans-serif;
+}
+
 .postOptions{
     display: flex;
     justify-content: space-around;

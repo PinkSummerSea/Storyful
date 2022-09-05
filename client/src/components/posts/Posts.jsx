@@ -2,7 +2,7 @@ import './Posts.css'
 import Post from '../post/Post'
 import {useDispatch, useSelector} from 'react-redux'
 import { useEffect } from 'react'
-import getTimelinePosts from '../../actions/PostAction.js'
+import {getTimelinePosts} from '../../actions/PostAction.js'
 import { useParams } from "react-router-dom";
 
 const Posts = () => {

@@ -1,20 +1,23 @@
 import React from 'react'
 import './ProfileCard.css'
 import {useSelector} from 'react-redux'
-import {Link, useParams} from 'react-router-dom'
+import {Link, useParams, useNavigate} from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import * as UserApi from "../../api/UserRequest.js";
 
 const ProfileCard = ({location}) => {
 
     const [user, setUser] = useState(useSelector(state => state.authReducer.authData.user)) 
+    const [diffUser, setDiffUser] = useState(false)
     const params = useParams()
+    const navigate = useNavigate()
 
     useEffect(() => {
       const fetchProfileUser = async () => {
         if (params.id && params.id !== user._id) {
           const res = await UserApi.getUser(params.id);
           setUser(res.data);
+          setDiffUser(true)
         } else {
           const res = await UserApi.getUser(user._id);
           setUser(res.data);
@@ -23,6 +26,12 @@ const ProfileCard = ({location}) => {
       fetchProfileUser();
       
     }, [params, user]);
+
+    const handleClick = () => {
+        if (diffUser) {
+            navigate('/chat')
+        }
+    }
 
     
    
@@ -39,6 +48,10 @@ const ProfileCard = ({location}) => {
             <div className="ProfileName">
                 <span>{user.firstname + ' ' + user.lastname}</span>
                 <span>{user.worksAt ? user.worksAt : "Tell us a little bit about you"}</span>
+            </div>
+
+            <div style={{display: 'flex', justifyContent:'center'}}>
+                <button className='button fc-button' onClick={handleClick}>Message {user.username}</button>
             </div>
 
             <div className="followStatus">

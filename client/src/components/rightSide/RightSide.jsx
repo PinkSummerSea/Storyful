@@ -7,10 +7,15 @@ import { UilSetting } from "@iconscout/react-unicons";
 import TrendCard from '../trendCard/TrendCard';
 import ShareModal from '../shareModal/ShareModal';
 import {Link} from 'react-router-dom'
-
+import { useNavigate } from 'react-router-dom';
 const RightSide = () => {
 
   const [modalOpened, setModalOpened] = useState(false)
+  const navigate = useNavigate()
+  const handleClick = () => {
+    navigate('/chat', {replace: true})
+  }
+
   return (
     <div className="RightSide">
       <div className="navIcons">
@@ -19,9 +24,7 @@ const RightSide = () => {
         </Link>
         <UilSetting />
         <img src={Noti} alt="" />
-        <Link to="../chat">
-          <img src={Comment} alt="" />
-        </Link>
+        <img src={Comment} alt="" onClick={handleClick} />
       </div>
 
       <TrendCard />

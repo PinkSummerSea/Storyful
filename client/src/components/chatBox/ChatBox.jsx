@@ -35,7 +35,7 @@ const ChatBox = ({chat, currentUserId, setSendMessage, receiveMessage}) => {
       const fetchMessages = async () => {
         try {
           const {data} = await getMessages(chat._id)
-          console.log(data)
+          //console.log(data)
           setMessages(data)
         } catch (error) {
           console.log(error);
@@ -80,61 +80,60 @@ const ChatBox = ({chat, currentUserId, setSendMessage, receiveMessage}) => {
   return (
     <>
       <div className="ChatBox-container">
-
         {chat ? (
-            <>
+          <>
             <div className="chat-header">
-                <div className="follower">
+              <div className="follower">
                 <div>
-                    <img
+                  <img
                     src={
-                        friendData?.profilePicture
+                      friendData?.profilePicture
                         ? process.env.REACT_APP_PUBLIC_FOLDER +
-                            friendData.profilePicture
+                          friendData.profilePicture
                         : process.env.REACT_APP_PUBLIC_FOLDER +
-                            "defaultProfile2.png"
+                          "defaultProfile2.png"
                     }
                     className="followerImg"
                     style={{ width: "50px", height: "50px" }}
                     alt=""
-                    />
-                    <div className="name" style={{ fontSize: "0.8rem" }}>
+                  />
+                  <div className="name" style={{ fontSize: "0.8rem" }}>
                     <span>
-                        {friendData?.firstname} {friendData?.lastname}
+                      {friendData?.firstname} {friendData?.lastname}
                     </span>
-                    </div>
+                  </div>
                 </div>
-                </div>
-                <hr style={{ width: "85%", border: "0.1px solid #ececec" }} />
+              </div>
+              <hr style={{ width: "85%", border: "0.1px solid #ececec" }} />
             </div>
 
             <div className="chat-body">
-                {messages.map((message) => (
-                
-                    <div
-                    ref = {scroll}
-                    className={
-                        message.senderId === currentUserId
-                        ? "message own"
-                        : "message"
-                    }
-                    key={message._id}
-                    >
-                        <span>{message.text}</span>
-                        <span>{format(message.createdAt)}</span>
-                    </div>
-                
-                ))}
+              {messages.map((message) => (
+                <div
+                  key={message._id}
+                  ref={scroll}
+                  className={
+                    message.senderId === currentUserId
+                      ? "message own"
+                      : "message"
+                  }
+                >
+                  <span>{message.text}</span>
+                  <span>{format(message.createdAt)}</span>
+                </div>
+              ))}
             </div>
 
             <div className="chat-sender">
-                <div>+</div>
-                <InputEmoji value={newMessage} onChange={handleChange} />
-                <div className="send-button button" onClick={handleSend}>Send</div>
+              <div>+</div>
+              <InputEmoji value={newMessage} onChange={handleChange} />
+              <div className="send-button button" onClick={handleSend}>
+                Send
+              </div>
             </div>
-            </>
+          </>
         ) : (
-            <span className='chatbox-empty-message'>start Chatting now!</span>
+          <span className="chatbox-empty-message">start Chatting now!</span>
         )}
       </div>
     </>

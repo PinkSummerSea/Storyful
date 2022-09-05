@@ -26,7 +26,7 @@ export const userChats = async(req, res) => {
     try {
         const chats = await ChatModel.find({
             members: {$in: [req.params.userId]}
-        })
+        }).sort({_id: -1})
         res.status(200).json(chats)
     } catch (error) {
          res.status(500).json(error)

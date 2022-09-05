@@ -4,7 +4,7 @@ import {useSelector} from 'react-redux'
 import {useState, useEffect} from 'react'
 import { userChats } from '../../api/ChatRequest'
 import Conversation from '../../components/conversation/Conversation'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import Home from "../../img/home.png";
 import Noti from "../../img/noti.png";
 import Comment from "../../img/comment.png";
@@ -22,17 +22,24 @@ const Chat = () => {
     const [sendMessage, setSendMessage] = useState(null)
     const [receiveMessage, setReceiveMessage] = useState(null);
     const [showNoti, setShowNoti] = useState(false);
-    const [read, setRead] = useState(false)
+    const [read, setRead] = useState(true)
     const socket = useRef()
-   
+    const location = useLocation()
+    const {state} = useLocation()
 
+   console.log(location)
     
+
     useEffect(()=>{
         socket.current = io('http://localhost:8800')
         socket.current.emit('new-user-add', user._id)
         socket.current.on('get-users', (activeUsers) =>  {
             setOnlineUsers(activeUsers)
         })
+
+        return()=>{
+          socket.current.disconnect()
+        }
         
     }, [user])
     
@@ -47,7 +54,6 @@ const Chat = () => {
 
     useEffect(() => {
       socket.current.on("receive-message", (data) => {
-        console.log(data)
         setReceiveMessage(data);
       });
     }, []);
@@ -56,21 +62,26 @@ const Chat = () => {
       console.log(receiveMessage)
       if (!currentChat || (receiveMessage?.chatId !== currentChat._id)) {
         setRead(false);
+      } else {
+        setRead(true)
       }
     }, [receiveMessage,!!currentChat])
 
-    useEffect(()=>{
-        const getChats = async()=>{
-            try {
-                const {data} = await userChats(user._id)
-                setChats(data)
-                console.log(data)
-            } catch (error) {
-                console.log(error)
-            }
+    useEffect(() => {
+      const getChats = async () => {
+        try {
+          const { data } = await userChats(user._id);
+          setChats(data);
+          state?.selectedChat
+            ? setCurrentChat(state.selectedChat)
+            : setCurrentChat(data[0]);
+          console.log(data);
+        } catch (error) {
+          console.log(error);
         }
-        getChats()
-    }, [user])
+      };
+      getChats();
+    }, [user]);
 
     useEffect(() => {
       if (
@@ -95,7 +106,6 @@ const Chat = () => {
         <LogoSearch />
         <div className="Chat-container">
           <h2>Chats</h2>
-          <h3>{receiveMessage?.chatId}</h3>
           <div className="Chat-list">
             {chats.map((chat) => (
               <div

@@ -1,11 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
-import { getAllPosts } from "../../actions/PostAction";
+import { getAllPosts, updateQueriedPosts } from "../../actions/PostAction";
 import ReactMapGL, { Marker, FlyToInterpolator, Popup } from "react-map-gl";
 import useSupercluster from "use-supercluster";
 import './CityMap.css'
 import {useSelector, useDispatch} from 'react-redux'
-import {Link} from 'react-router-dom'
-
+import {Link, useNavigate} from 'react-router-dom'
+import axios from "axios";
+import book from "../../img/open-book.png";
 
 const CityMap = () => {
     let { allPosts } = useSelector((state) => state.postReducer);
@@ -13,6 +14,7 @@ const CityMap = () => {
     const [selectedSpot, setSelectedSpot] = useState(null)
     const [selectedSingle, setSelectedSingle] = useState(null)
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     useEffect(() => {
       dispatch(getAllPosts());
     }, []);
@@ -22,7 +24,7 @@ const CityMap = () => {
       longitude: -123.1207,
       width: "100vw",
       height: "100vh",
-      zoom: 8,
+      zoom: 10,
     });
 
     const mapRef = useRef()
@@ -36,7 +38,8 @@ const CityMap = () => {
             postUsername: post.username,
             postUserId: post.userId,
             postImage: post.image,
-            postDesc: post.desc
+            postDesc: post.desc,
+            postLocation: post.location
         },
         geometry: {
             type: 'Point',
@@ -61,6 +64,20 @@ const CityMap = () => {
     const handleClick = () => {
       setSelectedSingle(null)
       setSelectedSpot(null)
+    }
+
+    const redirect = async (clusterId) => {
+      const query = supercluster.getChildren(clusterId)[0].properties.postLocation
+      const { data } = await axios.get(`http://localhost:8000/post?q=${query}`);
+      dispatch(
+        updateQueriedPosts(data)
+      );
+      console.log(query)
+      query && navigate("/storybook", {
+        state: {
+          query: query
+        }
+      });
     }
 
     return (
@@ -125,12 +142,13 @@ const CityMap = () => {
                 latitude={latitude}
                 longitude={longitude}
               >
-                <button
-                  style={{ backgroundColor: "hotpink" }}
-                  onClick={()=>{setSelectedSingle(cluster)}}
-                >
-                  a
-                </button>
+                <img
+                  style={{ width: "2rem" }}
+                  src={book}
+                  onClick={() => {
+                    setSelectedSingle(cluster);
+                  }}
+                />
               </Marker>
             );
           })}
@@ -145,13 +163,15 @@ const CityMap = () => {
                   display: "flex",
                   gap: "1rem",
                   padding: "1rem",
-                  borderRadius: "30%",
                 }}
               >
                 {supercluster.getChildren(selectedSpot.id).map((child) => (
                   <div>
-                    <h3>{child.properties.postTitle}</h3>
-                    <Link to={`../profile/${child.properties.postUserId}`}>
+                    <h3 id="story-title">{child.properties.postTitle}</h3>
+                    <Link
+                      to={`../profile/${child.properties.postUserId}`}
+                      className="link"
+                    >
                       <p>by {child.properties.postUsername}</p>
                     </Link>
                     <div>
@@ -165,6 +185,9 @@ const CityMap = () => {
                         alt=""
                         style={{
                           width: "200px",
+                          position: "relative",
+                          top: "-10px",
+                          borderRadius: "10px",
                         }}
                       />
                     </div>
@@ -178,12 +201,17 @@ const CityMap = () => {
                   gap: "1rem",
                 }}
               >
-                <button
-                  onClick={handleClick}
-                >
+                <button className="button fc-button" onClick={handleClick}>
                   Close
                 </button>
-                <button>View More Stories</button>
+                <button
+                  className="button fc-button"
+                  onClick={() => {
+                    redirect(selectedSpot.id);
+                  }}
+                >
+                  View More Stories
+                </button>
               </div>
             </Popup>
           ) : null}
@@ -193,9 +221,18 @@ const CityMap = () => {
               longitude={parseFloat(selectedSingle.geometry.coordinates[0])}
               anchor="bottom"
             >
-              <div>
-                <h3>{selectedSingle.properties.postTitle}</h3>
-                <Link to={`../profile/${selectedSingle.properties.postUserId}`}>
+              <div
+                style={{
+                  padding: "0.5rem",
+                  position: "relative",
+                  top: "-10px",
+                }}
+              >
+                <h3 id="story-title">{selectedSingle.properties.postTitle}</h3>
+                <Link
+                  to={`../profile/${selectedSingle.properties.postUserId}`}
+                  className="link"
+                >
                   <p>by {selectedSingle.properties.postUsername}</p>
                 </Link>
                 <div>
@@ -209,6 +246,9 @@ const CityMap = () => {
                     alt=""
                     style={{
                       width: "200px",
+                      position: "relative",
+                      top: "-10px",
+                      borderRadius: "10px",
                     }}
                   />
                 </div>
@@ -220,12 +260,10 @@ const CityMap = () => {
                   gap: "1rem",
                 }}
               >
-                <button
-                  onClick={handleClick}
-                >
+                <button onClick={handleClick} className="button fc-button">
                   Close
                 </button>
-                <button>Read Story</button>
+                <button className="button fc-button">Read Story</button>
               </div>
             </Popup>
           ) : null}

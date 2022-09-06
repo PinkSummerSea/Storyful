@@ -20,12 +20,12 @@ const Posts = () => {
 
   return (
     <div className="Posts">
-        { loading? "Loading Posts..." :
-          posts.map((post, i) => {
-              return <Post data={post} key={post._id}/>
-          })}
+      {loading
+        ? "Loading Posts..."
+        :posts.map((post, i) => {return <Post data={post} key={post._id} />})
+      }
     </div>
-  )
+  );
 }
 
 export default Posts

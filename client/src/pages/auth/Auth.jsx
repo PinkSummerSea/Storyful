@@ -1,13 +1,13 @@
 import './Auth.css'
-import Logo from '../../img/macaron5.png'
+import Logo from '../../img/open-book.png'
 import {useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import { logIn, SignUp } from '../../actions/AuthAction'
-
+import { useNavigate } from 'react-router-dom'
 const Auth = () => {
 
   const [isSignUp, setIsSignUp] = useState(true)
-
+  const navigate = useNavigate()
   const dispatch = useDispatch()
 
   const loading = useSelector((state) => state.authReducer.loading)
@@ -26,6 +26,7 @@ const Auth = () => {
       data.password === data.confirmpass ? dispatch(SignUp(data)) : setPasswordConfirmed(false)
     } else {
       dispatch(logIn(data))
+      //navigate(-2)
     }
   }
 
@@ -39,8 +40,8 @@ const Auth = () => {
         <div className="a-left">
             <img src={Logo} alt=""/>
             <div className="Webname">
-                <h1>Storyful</h1>
-                <h6>Open Your Storybook <br/>and Discover Beautiful Souls</h6>
+                <h1 className='logo-text'>Storyful</h1>
+                <h6 className='slogan'>Open Your Storybook <br/>and Discover Beautiful Souls</h6>
             </div>
         </div>
 

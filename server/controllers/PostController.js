@@ -27,9 +27,17 @@ export const getPost = async(req, res) => {
 }
 
 export const getAllPosts = async(req, res) => {
+    const {q} = req.query
     try {
-        const posts = await PostModel.find()
-        res.status(200).json(posts)
+        //console.log(posts.length)
+        if (q) {
+            const filteredPosts = await PostModel.find({$or: [{"title": {'$regex' : q, '$options' : 'i'}}, {"desc": {'$regex' : q, '$options' : 'i'}}, {"location": {'$regex' : q, '$options' : 'i'}}]}).sort({_id: -1}) 
+            res.status(200).json(filteredPosts)
+        } else {
+            const posts = await PostModel.find().sort({_id: -1})
+            res.status(200).json(posts)
+        }
+        
     } catch (error) {
         res.status(500).json(error)
     }

@@ -1,0 +1,33 @@
+.Welcome {
+    display: flex;
+    flex-direction: column;
+}
+
+.Webname > h1 {
+    font-size: 5rem;
+    position: relative;
+    top: 1.3rem;
+}
+
+.Webname>h6 {
+    font-size: 1.8rem;
+    line-height: 2.5rem;
+    position: relative;
+    top: -1.5rem;
+}
+
+.a-left>img {
+    width: 14rem;
+}
+
+.welcome-button {
+    position: relative;
+    top: -15rem;
+    width: 39rem;
+    padding: 10px;
+    padding-left: 50px;
+    padding-right: 50px;
+    font-size: 1.5rem;
+    align-self: center;
+    
+}

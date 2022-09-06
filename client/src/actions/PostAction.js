@@ -24,3 +24,7 @@ export const getAllPosts = () => async(dispatch) => {
         dispatch({type: "FETCH_ALL_POSTS_FAIL"})
     }
 }
+
+export const updateQueriedPosts = (data) => (dispatch) => {
+    dispatch({type: "UPDATE_QUERIED_POSTS", data: data})
+}

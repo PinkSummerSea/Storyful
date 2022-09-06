@@ -7,6 +7,21 @@
     position: relative;
 }
 
+.logo-text {
+    /* font-family: 'Berkshire Swash', cursive; */
+    font-family: 'Fugaz One', cursive;
+}
+
+.slogan {
+    position: relative;
+    top: -15px;
+    text-align: center;
+    /* font-family: 'Aboreto', cursive; */
+    font-family: 'Belleza', sans-serif;
+    /* font-family: 'Cinzel Decorative', cursive; */
+    /* font-family: 'Edu VIC WA NT Beginner', cursive; */
+}
+
 .Auth > div {
     display: flex;
     align-items: center;
@@ -35,7 +50,7 @@
 
 .Webname>h6 {
     font-size: 1rem;
-    color: var(--gray);
+    color: rgb(177, 177, 177);
 }
 
 .infoForm {

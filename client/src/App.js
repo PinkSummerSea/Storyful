@@ -8,6 +8,8 @@ import {useSelector} from 'react-redux'
 import Chat from "./pages/chat/Chat";
 import CityStoryMap from "./pages/cityStoryMap/CityStoryMap";
 import CityMap from "./pages/cityMap/CityMap";
+import StoryBook from "./pages/storyBook/StoryBook";
+import Welcome from "./pages/welcome/Welcome";
 
 function App() {
 
@@ -17,12 +19,13 @@ function App() {
         <div className="blur" style={{top: '-18%', right: '0'}}></div>
         <div className="blur" style={{top: '36%', left: '-8rem'}}></div>
         <Routes>
-          <Route path='/' element={user?<Navigate to='home'/>:<Navigate to='auth'/>} />
+          <Route path='/' element={<Welcome />} />
           <Route path='/home' element={user? <Home/> : <Navigate to='../auth' />} />
           <Route path='/auth' element={user? <Navigate to='../home'/>:<Auth />} />
           <Route path='/profile/:id' element={user? <Profile />:<Navigate to='../auth' />} />
           <Route path='/chat' element={user ? <Chat /> : <Navigate to='../auth'/>} />
           <Route path='/city_map' element={<CityMap />} />
+          <Route path='/storybook' element={user?<StoryBook />:<Navigate to='../auth' />} />
         </Routes>
     </div>
   );

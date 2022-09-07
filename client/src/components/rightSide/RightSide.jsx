@@ -24,20 +24,23 @@ const RightSide = () => {
         </Link>
         <UilSetting />
         <img src={Noti} alt="" />
-        <img src={Comment} alt="" onClick={handleClick} />
+        <img src={Comment} alt="" onClick={handleClick} style={{cursor: 'pointer'}} />
       </div>
 
       <TrendCard />
 
       <button
         className="button r-button"
-        onClick={() => {
-          setModalOpened(true);
+        onClick={()=>{
+          navigate('/city_map')
         }}
+        // onClick={() => {
+        //   setModalOpened(true);
+        // }}
       >
-        Share
+        Explore City Story Map
       </button>
-      <ShareModal modalOpened={modalOpened} setModalOpened={setModalOpened} />
+      {/* <ShareModal modalOpened={modalOpened} setModalOpened={setModalOpened} /> */}
     </div>
   );
 }

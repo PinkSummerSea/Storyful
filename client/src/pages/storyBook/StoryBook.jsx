@@ -18,14 +18,20 @@ const StoryBook = () => {
   }, []);
   return (
     <>
-      <div style={{ display: "flex", justifyContent: "center" }}>
+      <div className='logo-wrapper'>
         <LogoSearch />
       </div>
-      {state?.query
-        ? queriedPosts.length > 0
-          ? queriedPosts.map((post) => <Post data={post} key={post._id} />)
-          : "Sorry, no result"
-        : allPosts.map((post) => <Post data={post} key={post._id} />)}
+      <div className="Storybook">
+        {state?.query
+          ? queriedPosts.length > 0
+            ? queriedPosts.map((post) => <Post data={post} key={post._id} />)
+            : "Sorry, no result"
+          : allPosts.map((post) => (
+              <div className="post-wrapper">
+                <Post data={post} key={post._id} from="storybook" />
+              </div>
+            ))}
+      </div>
     </>
   );
 }

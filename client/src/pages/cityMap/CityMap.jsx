@@ -81,7 +81,7 @@ const CityMap = () => {
     }
 
     return (
-      <div style={{ width: "100vw", height: "100vh" }}>
+      <div style={{ width: "100vw", height: "100vh", overflow:"visible" }}>
         <ReactMapGL
           {...viewport}
           maxZoom={20}

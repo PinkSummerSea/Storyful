@@ -10,14 +10,15 @@ import CityStoryMap from "./pages/cityStoryMap/CityStoryMap";
 import CityMap from "./pages/cityMap/CityMap";
 import StoryBook from "./pages/storyBook/StoryBook";
 import Welcome from "./pages/welcome/Welcome";
+import Story from "./pages/story/Story";
 
 function App() {
 
   const user = useSelector((state) => state.authReducer.authData)
   return (
     <div className="App">
-        <div className="blur" style={{top: '-18%', right: '0'}}></div>
-        <div className="blur" style={{top: '36%', left: '-8rem'}}></div>
+        {/* <div className="blur" style={{top: '-18%', right: '0'}}></div>
+        <div className="blur" style={{top: '36%', left: '-8rem'}}></div> */}
         <Routes>
           <Route path='/' element={<Welcome />} />
           <Route path='/home' element={user? <Home/> : <Navigate to='../auth' />} />
@@ -26,6 +27,7 @@ function App() {
           <Route path='/chat' element={user ? <Chat /> : <Navigate to='../auth'/>} />
           <Route path='/city_map' element={<CityMap />} />
           <Route path='/storybook' element={user?<StoryBook />:<Navigate to='../auth' />} />
+          <Route path='/story/:id' element={<Story />} />
         </Routes>
     </div>
   );

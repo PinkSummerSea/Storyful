@@ -5,12 +5,14 @@ import { useSelector, useDispatch } from 'react-redux'
 import { uploadImage, uploadPost } from '../../actions/UploadAction'
 import GeocoderMap from '../geocoderMap/GeocoderMap'
 import { useEffect } from 'react'
+import pen from '../../img/pen.png'
 
-const PostShare = () => {
+const PostShare = ({from}) => {
   const serverPublic = process.env.REACT_APP_PUBLIC_FOLDER;
   const loading = useSelector((state) => state.postReducer.uploading);
   const [image, setImage] = useState(null);
   const [location, setLocation] = useState(null);
+  const [hidden, setHidden] = useState(true)
   const imageRef = useRef();
   const desc = useRef();
   const title = useRef();
@@ -29,13 +31,21 @@ const PostShare = () => {
   };
 
   useEffect(()=>{
+    if(from === 'modal') {
+      setHidden(false)
+    }
+    
+  }, [])
+
+
+  useEffect(()=>{
       setLocation(document.querySelector(".mapboxgl-ctrl-geocoder--input")
         ?.value)
   }, [lat, lng])
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    console.dir(desc.current)
     const newPost = {
       userId: user._id,
       username: user.username,
@@ -66,70 +76,93 @@ const PostShare = () => {
 //   console.log(lat, lng)
 //   console.log(location)
 
-  return (
-    <div className="PostShare">
-      <img
-        src={
-          user.profilePicture
-            ? serverPublic + user.profilePicture
-            : serverPublic + "defaultProfile2.png"
-        }
-        alt=""
-      />
-      <div>
-        <input type="text" placeholder='Story Title' ref={title} required/>
-        <textarea
-          type="text"
-          placeholder="Tell your story to the world"
-          ref={desc}
-          rows={10}
-          required
-        />
-        <div style={{ height: "15rem" }}>
-          <GeocoderMap />
-        </div>
+  const showTextEditor = () => {
+    setHidden(prev => !prev)
+  }
 
-        <div className="postOptions">
+  return (
+    <div className="PostShareWrap">
+      <div className="PostShareTop">
+        <img
+          src={
+            user.profilePicture
+              ? serverPublic + user.profilePicture
+              : serverPublic + "defaultProfile2.png"
+          }
+          alt=""
+        />
+        <span onClick={showTextEditor}>Tell your story</span>
+        <img src={pen} alt="" onClick={showTextEditor} />
+      </div>
+      <div className="PostShare">
+        <div>
           <div
-            className="option"
-            style={{ color: "var(--photo" }}
-            onClick={() => imageRef.current.click()}
+            className='text-editor-wrapper'
+            hidden={hidden}
           >
-            <UilScenery />
-            Photo
-          </div>
-          <div className="option" style={{ color: "var(--video" }}>
-            <UilPlayCircle />
-            Video
-          </div>
-          <div className="option" style={{ color: "var(--schedule" }}>
-            <UilSchedule />
-            Schedule
-          </div>
-          
-          <button
-            className="button ps-button"
-            onClick={handleSubmit}
-            disabled={loading}
-          >
-            {loading ? "Uploading..." : "Share"}
-          </button>
-          <div style={{ display: "none" }}>
             <input
-              type="file"
-              name="myImage"
-              ref={imageRef}
-              onChange={onImageChange}
+              type="text"
+              id="tranparent-input"
+              placeholder="Story Title"
+              ref={title}
+              required
+            />
+
+            <textarea
+              type="text"
+              placeholder="Share your story with the world"
+              ref={desc}
+              rows={10}
+              required
+              id="mytextarea"
             />
           </div>
-        </div>
-
-        {image && (
-          <div className="previewImage">
-            <UilTimes onClick={() => setImage(null)} />
-            <img src={URL.createObjectURL(image)} alt="" />
+          <div style={{ height: "15rem" }}>
+            <GeocoderMap />
           </div>
-        )}
+
+          <div className="postOptions">
+            <div
+              className="option"
+              style={{ color: "var(--photo" }}
+              onClick={() => imageRef.current.click()}
+            >
+              <UilScenery />
+              Photo
+            </div>
+            <div className="option" style={{ color: "var(--video" }}>
+              <UilPlayCircle />
+              Video
+            </div>
+            <div className="option" style={{ color: "var(--schedule" }}>
+              <UilSchedule />
+              Schedule
+            </div>
+
+            <button
+              className="button ps-button"
+              onClick={handleSubmit}
+              disabled={loading}
+            >
+              {loading ? "Uploading..." : "Share"}
+            </button>
+            <div style={{ display: "none" }}>
+              <input
+                type="file"
+                name="myImage"
+                ref={imageRef}
+                onChange={onImageChange}
+              />
+            </div>
+          </div>
+
+          {image && (
+            <div className="previewImage">
+              <UilTimes onClick={() => setImage(null)} />
+              <img src={URL.createObjectURL(image)} alt="" />
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

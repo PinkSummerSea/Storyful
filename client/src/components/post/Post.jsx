@@ -8,8 +8,9 @@ import { useState } from 'react'
 import { likePost } from '../../api/PostRequest.js'
 import { useEffect } from 'react'
 import {UilLocationPoint} from "@iconscout/react-unicons";
+import { Link } from 'react-router-dom'
 
-const Post = ({ data }) => {
+const Post = ({ data, from }) => {
   const { user } = useSelector((state) => state.authReducer.authData);
   const [liked, setLiked] = useState();
   const [likes, setLikes] = useState()
@@ -28,11 +29,33 @@ const Post = ({ data }) => {
 
   return (
     <div className="Post">
+      <div className="detail">
+        <h3>
+          <Link to={`../story/${data._id}`} className="title">
+            {data.title}
+          </Link>
+        </h3>
+        <span style={{ position: "relative", top: "-10px", color: "gray" }}>
+          by {data.username}
+        </span>
+        {from === "story" ? (
+          <div dangerouslySetInnerHTML={{ __html: data.desc }}></div>
+        ) : (
+          <span className="desc">{data.desc.replace(/<[^>]*>?/gm, "")}</span>
+        )}
+      </div>
       <img
         src={data.image ? process.env.REACT_APP_PUBLIC_FOLDER + data.image : ""}
         alt=""
       />
-
+      <div style={{ position: "relative", marginBottom: "0.6rem" }}>
+        <span
+          style={{ color: "var(--location)", position: "relative", top: "5px" }}
+        >
+          <UilLocationPoint />
+        </span>
+        <span style={{ color: "gray" }}> {data.location}</span>
+      </div>
       <div className="postReact">
         <img
           src={liked ? Heart : NotLike}
@@ -47,18 +70,6 @@ const Post = ({ data }) => {
       <span style={{ color: "var(--gray)", fontSize: "12px" }}>
         {likes} likes
       </span>
-      <div className="detail">
-        <span>
-          <b>{data.username}: </b>
-        </span>
-        <span>{data.desc}</span>
-      </div>
-      <div style={{position:'relative'}}>
-        <span style={{ color: "var(--location)",position:'relative', top:'5px' }}>
-          <UilLocationPoint />  
-        </span>
-        <span> {data.location}</span>
-      </div>
     </div>
   );
 };

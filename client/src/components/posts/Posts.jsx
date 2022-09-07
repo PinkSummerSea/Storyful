@@ -22,7 +22,7 @@ const Posts = () => {
     <div className="Posts">
       {loading
         ? "Loading Posts..."
-        :posts.map((post, i) => {return <Post data={post} key={post._id} />})
+        :posts.map((post, i) => {return <Post data={post} key={post._id} from='posts'/>})
       }
     </div>
   );

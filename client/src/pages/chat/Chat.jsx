@@ -26,8 +26,8 @@ const Chat = () => {
     const socket = useRef()
     const location = useLocation()
     const {state} = useLocation()
-
-   console.log(location)
+   
+    console.log(location)
     
 
     useEffect(()=>{

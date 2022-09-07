@@ -27,7 +27,21 @@
         margin: 0;
       }
     </style>    
+    <script src='https://cdn.tiny.cloud/1/5zdvja9asjitnjb3d8muhz2er2x7wdi93xk1aig07lwqkkkx/tinymce/5/tinymce.min.js' referrerpolicy="origin"></script>
+    <script>
+      tinymce.remove();
+      tinymce.init({
+        selector: '#mytextarea',
+        setup: function (editor) {
+          editor.on('change', function () {
+            editor.save();
+          });
+        },
+        
 
+      });
+
+    </script>
     <title>Social Media App</title>
   </head>
   <body>

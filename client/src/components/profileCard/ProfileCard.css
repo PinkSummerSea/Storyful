@@ -85,12 +85,13 @@
     border-left: 2px solid var(--hrColor);
 }
 
-.ProfileCard > span{
-    font-weight: bold;
-    color:#f582c9;
+.ProfileCard > button{
     align-self: center;
     margin-bottom: 1rem;
     cursor: pointer;
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .fc-button {

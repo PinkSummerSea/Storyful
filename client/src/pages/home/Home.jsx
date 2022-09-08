@@ -7,7 +7,6 @@ import './Home.css'
 
 const Home = () => {
 
- 
   // function refreshPage() {
   //   setTimeout(() => {
   //     window.location.reload(false);
@@ -18,19 +17,19 @@ const Home = () => {
   // useEffect(()=>{
   //   refreshPage()
   // }, [])
-  let a = localStorage.getItem('hasReloaded')
-  console.log(a)
-  useEffect(() => {
-      if(!a) {
-        window.location.reload();
-        localStorage.setItem("hasReloaded", true);
+  // let a = localStorage.getItem('hasReloaded')
+  // console.log(a)
+  // useEffect(() => {
+  //     if(!a) {
+  //       window.location.reload();
+  //       localStorage.setItem("hasReloaded", true);
 
-      }
+  //     }
       
-      return () => {
-        localStorage.setItem("hasReloaded", false);
-      }
-  }, []);
+  //     return () => {
+  //       localStorage.setItem("hasReloaded", false);
+  //     }
+  // }, []);
 
   return (
     <div className='Home'>

@@ -17,7 +17,7 @@ const StoryBook = () => {
     dispatch(getAllPosts());
   }, []);
   return (
-    <>
+    <div className='wrapper'>
       <div className='logo-wrapper'>
         <LogoSearch />
       </div>
@@ -32,7 +32,7 @@ const StoryBook = () => {
               </div>
             ))}
       </div>
-    </>
+    </div>
   );
 }
 

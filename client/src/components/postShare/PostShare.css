@@ -53,10 +53,10 @@
     font-size: 17px;
     border: none;
     outline: none;  
-    width: 16rem;
+    /* width: 16rem;*/
     position: relative;
-    left: 5rem;
-    text-align: center;
+    left: -1rem;
+    /*text-align: center; */
 }
 
 

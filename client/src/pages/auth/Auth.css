@@ -17,9 +17,9 @@
     top: -15px;
     text-align: center;
     /* font-family: 'Aboreto', cursive; */
-    font-family: 'Belleza', sans-serif;
+    /* font-family: 'Belleza', sans-serif; */
     /* font-family: 'Cinzel Decorative', cursive; */
-    /* font-family: 'Edu VIC WA NT Beginner', cursive; */
+    font-family: 'Edu VIC WA NT Beginner', cursive;
 }
 
 .Auth > div {

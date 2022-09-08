@@ -5,6 +5,9 @@
     gap: 1rem;
 }
 
+.wrapper {
+    min-height: 100vh;
+}
 .post-wrapper {
     max-width: 30rem;
 }

@@ -1,6 +1,6 @@
 import '../auth/Auth.css'
 import './Welcome.css'
-import Logo from "../../img/open-book.png";
+import Logo from "../../img/open-book33.png";
 import {useNavigate} from 'react-router-dom'
 import React from 'react'
 
@@ -13,12 +13,12 @@ const Welcome = () => {
   }
 
   return (
-    <div className='Welcome'>
+    <div className="Welcome">
       <div className="Auth">
         <div className="a-left">
           <img src={Logo} alt="" />
           <div className="Webname">
-            <h1 className="logo-text big-logo-text">Storyful</h1>
+            <h1 id='welcome-logo' className="logo-text big-logo-text">Storyful</h1>
             <h6 className="slogan big-slogan">
               Open Your Storybook <br />
               and Discover Beautiful Souls
@@ -26,7 +26,9 @@ const Welcome = () => {
           </div>
         </div>
       </div>
-      <button className='button welcome-button' onClick={handleClick}>Explore City Story Map</button>
+      <button className="button welcome-button" id='welcome-button' onClick={handleClick}>
+        Explore City Story Map
+      </button>
     </div>
   );
 }

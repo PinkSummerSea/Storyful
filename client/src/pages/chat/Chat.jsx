@@ -5,10 +5,9 @@ import {useState, useEffect} from 'react'
 import { userChats } from '../../api/ChatRequest'
 import Conversation from '../../components/conversation/Conversation'
 import { Link, useLocation } from 'react-router-dom'
-import Home from "../../img/home.png";
-import Noti from "../../img/noti.png";
-import Comment from "../../img/comment.png";
-import { UilSetting } from "@iconscout/react-unicons";
+import Home from "../../img/home5.png";
+import Comment from "../../img/chat.png";
+import Globe from "../../img/globe11.png";
 import ChatBox from '../../components/chatBox/ChatBox'
 import {io} from 'socket.io-client'
 import { useRef } from 'react'
@@ -140,8 +139,9 @@ const Chat = () => {
             <Link to="../home">
               <img src={Home} alt="" />
             </Link>
-            <UilSetting />
-            <img src={Noti} alt="" />
+            <Link to="../city_map">
+              <img src={Globe} alt="" />
+            </Link>
             <Link to="../chat">
               <img src={Comment} alt="" />
             </Link>

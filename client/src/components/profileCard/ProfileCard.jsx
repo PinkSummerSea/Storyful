@@ -8,7 +8,7 @@ import { createChat } from '../../api/ChatRequest.js'
 
 const ProfileCard = ({location}) => {
 
-    const [user, setUser] = useState(useSelector(state => state.authReducer.authData.user)) 
+    const {user} = useSelector(state => state.authReducer.authData)
     const [profileUser, setProfileUser] = useState(null)
     const [diffUser, setDiffUser] = useState(false)
     const params = useParams()
@@ -115,7 +115,7 @@ const ProfileCard = ({location}) => {
           <hr />
         </div>
 
-        {location === "profilePage" ? (
+        {diffUser ? (
           ""
         ) : (
           <button className='button'>

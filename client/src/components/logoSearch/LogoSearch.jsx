@@ -1,6 +1,6 @@
 import {useState} from 'react'
 import './LogoSearch.css'
-import Logo from "../../img/open-book.png";
+import Logo from "../../img/open-book33.png";
 import {UilSearch} from '@iconscout/react-unicons'
 import {useDispatch} from 'react-redux'
 import { updateQuery } from '../../actions/UserAction'

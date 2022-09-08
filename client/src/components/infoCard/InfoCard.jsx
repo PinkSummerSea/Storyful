@@ -34,43 +34,58 @@ const InfoCard = () => {
         }
 
         fetchProfileUser()
-    },[user])
+    },[user, profileUserId])
     return (
-        <div className="InfoCard">
-            <div className="infoHead">
-                <h4>{profileUser.firstname}'s Profile</h4>
-                {profileUser === user && (
-                    <div>
-                        <UilPen width='2rem' height='1.2rem' onClick={()=>{setModalOpened(true)}}/>
-                        <ProfileModal modalOpened={modalOpened} setModalOpened={setModalOpened} data={user}/>
-                    </div>
-                )} 
+      <div className="InfoCard">
+        <div className="infoHead">
+          <h4>{profileUser.firstname}'s Profile</h4>
+          {profileUser === user && (
+            <div>
+              <UilPen
+                width="2rem"
+                height="1.2rem"
+                onClick={() => {
+                  setModalOpened(true);
+                }}
+              />
+              <ProfileModal
+                modalOpened={modalOpened}
+                setModalOpened={setModalOpened}
+                data={user}
+              />
             </div>
-
-            <div className="info">
-                <span>
-                    <b>Status </b>
-                </span>
-                <span>{profileUser.relationship ? profileUser.relationship : ''}</span>
-            </div>
-
-            <div className="info">
-                <span>
-                    <b>Lives in </b>
-                </span>
-                <span>{profileUser.livesin ? profileUser.livesin : ''}</span>
-            </div>
-
-            <div className="info">
-                <span>
-                    <b>Works at </b>
-                </span>
-                <span>{profileUser.worksat ? profileUser.worksat : ''}</span>
-            </div>
-
-            <button className='button logout-button' onClick={handleLogout}>Logout</button>
+          )}
         </div>
-    )
+
+        <div className="info">
+          <span>
+            <b>Status </b>
+          </span>
+          <span>
+            {profileUser.relationship ? profileUser.relationship : ""}
+          </span>
+        </div>
+
+        <div className="info">
+          <span>
+            <b>Lives in </b>
+          </span>
+          <span>{profileUser.livesin ? profileUser.livesin : ""}</span>
+        </div>
+
+        <div className="info">
+          <span>
+            <b>Works at </b>
+          </span>
+          <span>{profileUser.worksat ? profileUser.worksat : ""}</span>
+        </div>
+        {profileUser === user && (
+          <button className="button logout-button" onClick={handleLogout}>
+            Logout
+          </button>
+        )}
+      </div>
+    );
 }
 
 export default InfoCard

@@ -1,26 +1,26 @@
 export const trendData= [
     {
-      name: "Covid",
-      shares: 970,
+      name: "Meteor shower",
+      shares: 7.1,
     },
     {
       name: "Adventure",
-      shares: 805,
+      shares: 5.6,
     },
     {
-      name: "Kayleigh",
-      shares: 755,
+      name: "Scarlett",
+      shares: 5.3,
     },
     {
       name: "React",
-      shares: 700,
+      shares: 4.9,
     },
     {
       name: "Movie Stranger",
-      shares: 700,
+      shares: 3.1
     },
     {
-      name: "Johnny Depp",
-      shares: 689,
+      name: "JavaScript",
+      shares: 2.5,
     },
   ];

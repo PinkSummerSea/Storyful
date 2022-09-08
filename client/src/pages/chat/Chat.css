@@ -2,8 +2,8 @@
     position: relative;
     display: grid;
     grid-template-columns: 22% auto;
-    gap: 1rem;
-    padding: 1rem 8rem;
+    gap: 2rem;
+    padding: 1rem 10rem;
 }
 
 .Left-side-chat {

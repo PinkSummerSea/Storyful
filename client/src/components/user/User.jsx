@@ -30,6 +30,7 @@ const User = ({person}) => {
           alt=""
           className="followerImg"
           onClick={handleRedirect}
+          style={{cursor: 'pointer'}}
         />
         <div className="name" onClick={handleRedirect}>
           <span>

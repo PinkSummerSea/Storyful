@@ -6,10 +6,13 @@ import { uploadImage, uploadPost } from '../../actions/UploadAction'
 import GeocoderMap from '../geocoderMap/GeocoderMap'
 import { useEffect } from 'react'
 import pen from '../../img/pen.png'
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const PostShare = ({from}) => {
   const serverPublic = process.env.REACT_APP_PUBLIC_FOLDER;
   const loading = useSelector((state) => state.postReducer.uploading);
+  
   const [image, setImage] = useState(null);
   const [location, setLocation] = useState(null);
   const [hidden, setHidden] = useState(true)
@@ -45,7 +48,21 @@ const PostShare = ({from}) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.dir(desc.current)
+    //console.dir(desc.current)
+
+    if (!user._id || !desc.current.value || !title.current.value || !location || !lat || !lng) {
+      toast("🦄 Please fill all required fields", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      return;
+    }
+
     const newPost = {
       userId: user._id,
       username: user.username,
@@ -94,12 +111,10 @@ const PostShare = ({from}) => {
         <span onClick={showTextEditor}>Tell your story</span>
         <img src={pen} alt="" onClick={showTextEditor} />
       </div>
+      <ToastContainer />
       <div className="PostShare">
         <div>
-          <div
-            className='text-editor-wrapper'
-            hidden={hidden}
-          >
+          <div className="text-editor-wrapper" hidden={hidden}>
             <input
               type="text"
               id="tranparent-input"

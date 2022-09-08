@@ -29,7 +29,7 @@ const CityMap = () => {
 
     const mapRef = useRef()
 
-    const points = allPosts.map(post => ({
+    const points = allPosts?.map(post => ({
         type: 'Feature',
         properties: {
             cluster: false,
@@ -81,7 +81,7 @@ const CityMap = () => {
     }
 
     return (
-      <div style={{ width: "100vw", height: "100vh", overflow:"visible" }}>
+      <div style={{ width: "100vw", height: "100vh", overflow: "visible" }}>
         <ReactMapGL
           {...viewport}
           maxZoom={20}
@@ -167,7 +167,12 @@ const CityMap = () => {
               >
                 {supercluster.getChildren(selectedSpot.id).map((child) => (
                   <div>
-                    <h3 id="story-title">{child.properties.postTitle}</h3>
+                    <Link
+                      to={`../story/${child.properties.postUserId}/${child.properties.postId}`}
+                      className="link"
+                    >
+                      <h3 id="story-title">{child.properties.postTitle}</h3>
+                    </Link>
                     <Link
                       to={`../profile/${child.properties.postUserId}`}
                       className="link"
@@ -263,7 +268,14 @@ const CityMap = () => {
                 <button onClick={handleClick} className="button fc-button">
                   Close
                 </button>
-                <button className="button fc-button">Read Story</button>
+                <button className="button fc-button">
+                  <Link
+                    to={`../story/${selectedSingle.properties.postUserId}/${selectedSingle.properties.postId}`}
+                    className="text"
+                  >
+                    Read Story
+                  </Link>
+                </button>
               </div>
             </Popup>
           ) : null}

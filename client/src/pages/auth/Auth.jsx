@@ -1,14 +1,21 @@
 import './Auth.css'
-import Logo from '../../img/open-book.png'
+import Logo from '../../img/open-book33.png'
 import {useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import { logIn, SignUp } from '../../actions/AuthAction'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
 const Auth = () => {
 
   const [isSignUp, setIsSignUp] = useState(true)
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const location = useLocation()
+
+  useEffect(()=>{
+    console.log(location)
+  }, [])
+
 
   const loading = useSelector((state) => state.authReducer.loading)
 

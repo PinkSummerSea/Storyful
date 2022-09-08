@@ -31,7 +31,7 @@ const Post = ({ data, from }) => {
     <div className="Post">
       <div className="detail">
         <h3>
-          <Link to={`../story/${data._id}`} className="title">
+          <Link to={`../story/${data.userId}/${data._id}`} className="title">
             {data.title}
           </Link>
         </h3>

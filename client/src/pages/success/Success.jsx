@@ -40,7 +40,12 @@ const Success = () => {
             </a>
           </p>
 
-          <button className="button" style={{ marginTop: "2em" }} onClick={()=>navigate('../home')}>
+          <button
+            className="button"
+            id="fc-button"
+            style={{ marginTop: "2em" }}
+            onClick={() => navigate("../home")}
+          >
             Go back to homepage
           </button>
         </div>

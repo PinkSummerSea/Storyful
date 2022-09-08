@@ -83,7 +83,7 @@ div.column:nth-child(1)>ul:nth-child(1)>li:nth-child(1) {
     }
 }
 
-p {
+.header>p {
     font-family: Arial;
     font-size: 10px;
     color: gray;

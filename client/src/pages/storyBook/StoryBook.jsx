@@ -10,7 +10,7 @@ import Header from '../../components/header/Header';
 const StoryBook = () => {
   const { queriedPosts } = useSelector((state) => state.postReducer);
   const {state} = useLocation()
-  console.log(queriedPosts)
+  //console.log(queriedPosts)
   let { allPosts } = useSelector((state) => state.postReducer);
   //const [postsToShow, setPostsToShow] = useState(allPosts);
   const dispatch = useDispatch();
@@ -18,16 +18,18 @@ const StoryBook = () => {
     dispatch(getAllPosts());
   }, []);
   return (
-    <div className='wrapper'>
+    <div className="wrapper">
       <Header />
       <div className="Storybook">
         {state?.query
           ? queriedPosts.length > 0
-            ? queriedPosts.map((post) => <Post data={post} key={post._id} />)
+            ? queriedPosts.map((post) => (
+                <Post data={post} key={post._id} from="storybook" />
+              ))
             : "Sorry, no result"
           : allPosts.map((post) => (
               <div className="post-wrapper">
-                <Post data={post} key={post._id} from="storybook" />
+                <Post from="storybook" data={post} key={post._id} />
               </div>
             ))}
       </div>

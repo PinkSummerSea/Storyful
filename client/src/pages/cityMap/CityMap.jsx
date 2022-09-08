@@ -6,7 +6,7 @@ import './CityMap.css'
 import {useSelector, useDispatch} from 'react-redux'
 import {Link, useNavigate} from 'react-router-dom'
 import axios from "axios";
-import book from "../../img/open-book.png";
+import book from "../../img/open-book33.png";
 
 const CityMap = () => {
     let { allPosts } = useSelector((state) => state.postReducer);
@@ -20,11 +20,11 @@ const CityMap = () => {
     }, []);
 
     const [viewport, setViewport] = useState({
-      latitude: 49.2827,
-      longitude: -123.1207,
+      latitude: 0,
+      longitude: 0,
       width: "100vw",
       height: "100vh",
-      zoom: 10,
+      zoom: 2,
     });
 
     const mapRef = useRef()
@@ -54,7 +54,7 @@ const CityMap = () => {
         zoom: viewport.zoom,
         bounds,
         options: {
-            radius: 5,
+            radius: 30,
             maxZoom: 20
         }
     })
@@ -106,8 +106,8 @@ const CityMap = () => {
                   <div
                     className="cluster"
                     style={{
-                      width: `${10 + (point_count / points.length) * 50}px`,
-                      height: `${10 + (point_count / points.length) * 50}px`,
+                      width: `${10+(point_count / points.length) * 200}px`,
+                      height: `${10+(point_count / points.length) * 200}px`,
                     }}
                     onClick={() => {
                       const expansionZoom = Math.min(
@@ -143,7 +143,7 @@ const CityMap = () => {
                 longitude={longitude}
               >
                 <img
-                  style={{ width: "2rem" }}
+                  style={{ width: "1.5rem" }}
                   src={book}
                   onClick={() => {
                     setSelectedSingle(cluster);
@@ -165,7 +165,7 @@ const CityMap = () => {
                   padding: "1rem",
                 }}
               >
-                {supercluster.getChildren(selectedSpot.id).map((child) => (
+                {supercluster.getChildren(selectedSpot.id).slice(0,5).map((child) => (
                   <div>
                     <Link
                       to={`../story/${child.properties.postUserId}/${child.properties.postId}`}

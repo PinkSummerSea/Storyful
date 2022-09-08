@@ -3,6 +3,8 @@ dotenv.config()
 
 import mongoose from 'mongoose'
 import {locations} from './locations.js'
+import {cities} from './cities.js'
+import {quotes} from './quotes.js'
 import postModel from '../models/postModel.js'
 
 mongoose.connect(process.env.MONGO_URL, {useNewUrlParser: true, useUnifiedTopology: true})
@@ -12,35 +14,108 @@ mongoose.connect(process.env.MONGO_URL, {useNewUrlParser: true, useUnifiedTopolo
 const seedDB = async () => {
     await postModel.deleteMany({});
 
-    for (let i = 0; i < 20; i++) {
-        const random5 = Math.floor(Math.random() * 5);
+    for (let i = 0; i < 10; i++) {
+        const random10 = Math.floor(Math.random() * 10);
+        const random101 = Math.floor(Math.random() * 101);
         const post = new postModel({
-            userId: "631182e83864f739fbd81683",
+            userId: "631182e83864f739fbd81683", //summer
             username: "Summer",
-            lng: locations[random5].longitude,
-            lat: locations[random5].latitude, 
-            location: `${locations[random5].name}, ${locations[random5].city}, ${locations[random5].province}`,
-            title: `My secret story ${i}`,
-            image: "test.jpg",
-            desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias!"
+            lng: locations[random10].longitude,
+            lat: locations[random10].latitude, 
+            location: `${locations[random10].name}, ${locations[random10].city}, ${locations[random10].province}`,
+            title: quotes[random101].quote,
+            image: `${i+1}.png`,
+            desc: `<p>${quotes[random101 + 1].quote}</p><p>I'm on holiday for the UK and I am absolutely blown away by how beautiful Canada is. Banff was gorgeous! I told my mates we had to be at Moraine Lake early. Got there at 0430 and had one of the last 5 spaces, so thank you to everyone who put advice on this page. I am genuinely gobsmacked by this stunning country. And everyone is so friendly.</p><p>This is from years back, but it was on a family trip when I was 12: American tourists asking my parents why the ski lift was closed at Lake Louise. back then, it wasn't open in non-skiing season. They were carrying ski equipment and were ready to go. It was mid-July and at least 34 C that day. My parents just laughed at them, lol.</p>`
         })
 
         await post.save()
     }
 
-    const testPost = new postModel({
-            userId: "631182e83864f739fbd81683",
-            username: "Summer",
-            lng: '-123.2045',
-            lat: '49.3960',
-            location: 'test location',
-            title: `Test Story`,
-            image: "test.jpg",
-            desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias!"
+    for (let i = 0; i < 10; i++) {
+        const random10 = Math.floor(Math.random() * 10);
+        const random101 = Math.floor(Math.random() * 101);
+        const post = new postModel({
+            userId: "631185493864f739fbd81698", //juliet
+            username: "Juliet",
+            lng: locations[random10].longitude,
+            lat: locations[random10].latitude, 
+            location: `${locations[random10].name}, ${locations[random10].city}, ${locations[random10].province}`,
+            title: quotes[random101].quote,
+            image: `${i+11}.png`,
+            desc: `<p>${quotes[random101 + 1].quote}</p><p>I'm on holiday for the UK and I am absolutely blown away by how beautiful Canada is. Banff was gorgeous! I told my mates we had to be at Moraine Lake early. Got there at 0430 and had one of the last 5 spaces, so thank you to everyone who put advice on this page. I am genuinely gobsmacked by this stunning country. And everyone is so friendly.</p><p>This is from years back, but it was on a family trip when I was 12: American tourists asking my parents why the ski lift was closed at Lake Louise. back then, it wasn't open in non-skiing season. They were carrying ski equipment and were ready to go. It was mid-July and at least 34 C that day. My parents just laughed at them, lol.</p>`
         })
 
-    await testPost.save()
+        await post.save()
+    }
 
+    for (let i = 0; i < 10; i++) {
+        const random10 = Math.floor(Math.random() * 10);
+        const random101 = Math.floor(Math.random() * 101);
+        const post = new postModel({
+            userId: "63119ff9914434a87c4bd481", //anna
+            username: "Anna",
+            lng: locations[random10].longitude,
+            lat: locations[random10].latitude, 
+            location: `${locations[random10].name}, ${locations[random10].city}, ${locations[random10].province}`,
+            title: quotes[random101].quote,
+            image: `${i+21}.png`,
+            desc: `<p>${quotes[random101 + 1].quote}</p><p>I'm on holiday for the UK and I am absolutely blown away by how beautiful Canada is. Banff was gorgeous! I told my mates we had to be at Moraine Lake early. Got there at 0430 and had one of the last 5 spaces, so thank you to everyone who put advice on this page. I am genuinely gobsmacked by this stunning country. And everyone is so friendly.</p><p>This is from years back, but it was on a family trip when I was 12: American tourists asking my parents why the ski lift was closed at Lake Louise. back then, it wasn't open in non-skiing season. They were carrying ski equipment and were ready to go. It was mid-July and at least 34 C that day. My parents just laughed at them, lol.</p>`
+        })
+
+        await post.save()
+    }
+
+    for (let i = 0; i < 10; i++) {
+        const random10 = Math.floor(Math.random() * 10);
+        const random101 = Math.floor(Math.random() * 101);
+        const post = new postModel({
+            userId: "6318cc88106a990467fcf90c", //story
+            username: "Story",
+            lng: locations[random10].longitude,
+            lat: locations[random10].latitude, 
+            location: `${locations[random10].name}, ${locations[random10].city}, ${locations[random10].province}`,
+            title: quotes[random101].quote,
+            image: `${i+31}.png`,
+            desc: `<p>${quotes[random101 + 1].quote}</p><p>I'm on holiday for the UK and I am absolutely blown away by how beautiful Canada is. Banff was gorgeous! I told my mates we had to be at Moraine Lake early. Got there at 0430 and had one of the last 5 spaces, so thank you to everyone who put advice on this page. I am genuinely gobsmacked by this stunning country. And everyone is so friendly.</p><p>This is from years back, but it was on a family trip when I was 12: American tourists asking my parents why the ski lift was closed at Lake Louise. back then, it wasn't open in non-skiing season. They were carrying ski equipment and were ready to go. It was mid-July and at least 34 C that day. My parents just laughed at them, lol.</p>`
+        })
+
+        await post.save()
+    }
+
+    for (let i = 0; i < 10; i++) {
+        const random10 = Math.floor(Math.random() * 10);
+        const random101 = Math.floor(Math.random() * 101);
+        const post = new postModel({
+            userId: "6318ed74106a990467fcfb97", //adeventurer
+            username: "Adventurer",
+            lng: locations[random10].longitude,
+            lat: locations[random10].latitude, 
+            location: `${locations[random10].name}, ${locations[random10].city}, ${locations[random10].province}`,
+            title: quotes[random101].quote,
+            image: `${i+41}.png`,
+            desc: `<p>${quotes[random101 + 1].quote}</p><p>I'm on holiday for the UK and I am absolutely blown away by how beautiful Canada is. Banff was gorgeous! I told my mates we had to be at Moraine Lake early. Got there at 0430 and had one of the last 5 spaces, so thank you to everyone who put advice on this page. I am genuinely gobsmacked by this stunning country. And everyone is so friendly.</p><p>This is from years back, but it was on a family trip when I was 12: American tourists asking my parents why the ski lift was closed at Lake Louise. back then, it wasn't open in non-skiing season. They were carrying ski equipment and were ready to go. It was mid-July and at least 34 C that day. My parents just laughed at them, lol.</p>`
+        })
+
+        await post.save()
+    }
+    
+    for (let i = 0; i < 500; i++) {
+        const random = Math.floor(Math.random() * 140603);
+        const random101 = Math.floor(Math.random() * 101);
+        const random50 = Math.floor(Math.random() * 50) + 1;
+        const post = new postModel({
+            userId: "6318ec8f106a990467fcfb3f", //Crazy Storyful Lover
+            username: "Crazy Storyful Lover",
+            lng: cities[random].lng,
+            lat: cities[random].lat, 
+            location: `${cities[random].name}, ${cities[random].country}`,
+            title: quotes[random101].quote,
+            image: `${random50}.png`,
+            desc: `<p>${quotes[random101 + 1].quote}</p><p>I'm on holiday for the UK and I am absolutely blown away by how beautiful Canada is. Banff was gorgeous! I told my mates we had to be at Moraine Lake early. Got there at 0430 and had one of the last 5 spaces, so thank you to everyone who put advice on this page. I am genuinely gobsmacked by this stunning country. And everyone is so friendly.</p><p>This is from years back, but it was on a family trip when I was 12: American tourists asking my parents why the ski lift was closed at Lake Louise. back then, it wasn't open in non-skiing season. They were carrying ski equipment and were ready to go. It was mid-July and at least 34 C that day. My parents just laughed at them, lol.</p>`
+        })
+
+        await post.save()
+    }
 }
 
 seedDB().then(()=>{

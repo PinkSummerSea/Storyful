@@ -26,12 +26,12 @@ const Post = ({ data, from }) => {
     setLikes(data.likes.length)
   }, [data.likes])
 
-
+  console.log(from)
   return (
-    <div className="Post">
+    <div className={from ==='storybook' ? 'StorybookPost' :'Post'}>
       <div className="detail">
-        <h3>
-          <Link to={`../story/${data.userId}/${data._id}`} className="title">
+        <h3 id='short'>
+          <Link to={`../story/${data.userId}/${data._id}`} id="title">
             {data.title}
           </Link>
         </h3>

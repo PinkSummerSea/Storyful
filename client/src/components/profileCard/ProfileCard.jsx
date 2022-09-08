@@ -37,7 +37,9 @@ const ProfileCard = ({location}) => {
         }
     }
 
-    
+    const visitProfilePage = () => {
+        navigate(`../profile/${profileUser?._id || user._id}`);
+    }    
    
     const posts = useSelector(state => state.postReducer.posts)
     const serverPublic = process.env.REACT_APP_PUBLIC_FOLDER
@@ -60,6 +62,8 @@ const ProfileCard = ({location}) => {
                 : serverPublic + "defaultProfile2.png"
             }
             alt=""
+            onClick={visitProfilePage}
+            style={{ cursor: "pointer" }}
           />
         </div>
 
@@ -118,7 +122,7 @@ const ProfileCard = ({location}) => {
         {diffUser ? (
           ""
         ) : (
-          <button className='button'>
+          <button className="button">
             <Link
               style={{ textDecoration: "none", color: "inherit" }}
               to={`/profile/${user._id}`}

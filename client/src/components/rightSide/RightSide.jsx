@@ -7,6 +7,8 @@ import TrendCard from '../trendCard/TrendCard';
 //import ShareModal from '../shareModal/ShareModal';
 import {Link} from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
+import Crown from "../../img/crown (1)(1).png";
+
 const RightSide = () => {
 
   const [modalOpened, setModalOpened] = useState(false)
@@ -31,6 +33,9 @@ const RightSide = () => {
         />
         <Link to="../city_map">
           <img src={Globe} alt="" />
+        </Link>
+        <Link to="../membership">
+          <img src={Crown} alt="" />
         </Link>
       </div>
 

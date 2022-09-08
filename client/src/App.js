@@ -11,6 +11,8 @@ import StoryBook from "./pages/storyBook/StoryBook";
 import Welcome from "./pages/welcome/Welcome";
 import Story from "./pages/story/Story";
 import NotFound from "./pages/notFound/NotFound";
+import Membership from "./pages/membership/Membership";
+import Success from "./pages/success/Success";
 
 function App() {
 
@@ -30,6 +32,8 @@ function App() {
             <Route path='/city_map' element={<CityMap />} />
             <Route path='/storybook' element={user?<StoryBook />:<Navigate to='../auth' state={{from: location.pathname}}/>} />
             <Route path='/story/:id/:storyId' element={user?<Story />:<Navigate to='../auth' state={{from: location.pathname}}/>} />
+            <Route path='/membership' element={<Membership />} />
+            <Route path='/success' element={<Success />} />
             <Route path='*' element={<NotFound />} />
           </Routes>
         

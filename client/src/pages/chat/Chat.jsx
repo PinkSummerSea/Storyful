@@ -11,6 +11,7 @@ import Globe from "../../img/globe11.png";
 import ChatBox from '../../components/chatBox/ChatBox'
 import {io} from 'socket.io-client'
 import { useRef } from 'react'
+import Crown from "../../img/crown (1)(1).png";
 
 const Chat = () => {
     
@@ -144,6 +145,9 @@ const Chat = () => {
             </Link>
             <Link to="../chat">
               <img src={Comment} alt="" />
+            </Link>
+            <Link to="../membership">
+              <img src={Crown} alt="" />
             </Link>
           </div>
         </div>

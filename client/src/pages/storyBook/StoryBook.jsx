@@ -3,8 +3,9 @@ import { useState, useRef, useEffect } from "react";
 import { getAllPosts } from "../../actions/PostAction";
 import { useSelector, useDispatch } from "react-redux";
 import Post from '../../components/post/Post';
-import LogoSearch from '../../components/logoSearch/LogoSearch';
+
 import {useLocation} from 'react-router-dom'
+import Header from '../../components/header/Header';
 
 const StoryBook = () => {
   const { queriedPosts } = useSelector((state) => state.postReducer);
@@ -18,9 +19,7 @@ const StoryBook = () => {
   }, []);
   return (
     <div className='wrapper'>
-      <div className='logo-wrapper'>
-        <LogoSearch />
-      </div>
+      <Header />
       <div className="Storybook">
         {state?.query
           ? queriedPosts.length > 0

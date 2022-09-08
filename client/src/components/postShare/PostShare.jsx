@@ -132,7 +132,7 @@ const PostShare = ({from}) => {
               id="mytextarea"
             />
           </div>
-          <div style={{ height: "15rem" }}>
+          <div style={{ height: "20rem" }}>
             <GeocoderMap />
           </div>
 

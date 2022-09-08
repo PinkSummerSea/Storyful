@@ -14,8 +14,11 @@ import PostRoute from './routes/PostRoute.js'
 import UploadRoute from './routes/UploadRoute.js'
 import ChatRoute from './routes/ChatRoute.js'
 import MessageRoute from './routes/MessageRoute.js'
+import PaymentRoute from './routes/PaymentRoute.js'
 
 const app = express()
+
+
 
 // serve image for public
 
@@ -40,3 +43,4 @@ app.use('/post', PostRoute)
 app.use('/upload', UploadRoute)
 app.use('/chat', ChatRoute)
 app.use('/message', MessageRoute)
+app.use('/payment', PaymentRoute)

@@ -34,7 +34,7 @@ const LogoSearch = () => {
     <div className="LogoSearch">
         <img src={Logo} alt='logo' className='logo'/>
         <div className="Search">
-          <input type='text' placeholder='#Explore' onChange={e=>setQuery(e.target.value)}/>
+          <input type='text' placeholder='#Find Stories' onChange={e=>setQuery(e.target.value)}/>
           <div className="s-icon" onClick={handleSearch}>
             <UilSearch />
           </div>

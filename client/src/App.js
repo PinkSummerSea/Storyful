@@ -20,9 +20,6 @@ function App() {
   const location = useLocation()
   return (
     <div className="App">
-        {/* <div className="blur" style={{top: '-18%', right: '0'}}></div>
-        <div className="blur" style={{top: '36%', left: '-8rem'}}></div> */}
-        
           <Routes>
             <Route path='/' element={<Welcome />} />
             <Route path='/home' element={user? <Home/> : <Navigate to='../auth' />} />
@@ -36,7 +33,6 @@ function App() {
             <Route path='/success' element={<Success />} />
             <Route path='*' element={<NotFound />} />
           </Routes>
-        
     </div>
   );
 }

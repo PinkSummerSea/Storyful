@@ -42,6 +42,7 @@ const ProfileCard = ({location}) => {
     }    
    
     const posts = useSelector(state => state.postReducer.posts)
+    const {allPosts} = useSelector((state) => state.postReducer);
     const serverPublic = process.env.REACT_APP_PUBLIC_FOLDER
 
     return (
@@ -106,7 +107,7 @@ const ProfileCard = ({location}) => {
                 <div className="follow">
                   <span>
                     {
-                      posts.filter(
+                      allPosts.filter(
                         (p) => p.userId === (profileUser || user)._id
                       ).length
                     }

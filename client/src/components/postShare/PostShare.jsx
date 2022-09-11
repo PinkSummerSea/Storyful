@@ -1,4 +1,4 @@
-import {useState, useRef} from 'react'
+import { useState, useRef, useMemo } from "react";
 import './PostShare.css'
 import { UilScenery, UilPlayCircle, UilSchedule, UilTimes } from '@iconscout/react-unicons'
 import { useSelector, useDispatch } from 'react-redux'
@@ -6,18 +6,22 @@ import { uploadImage, uploadPost } from '../../actions/UploadAction'
 import GeocoderMap from '../geocoderMap/GeocoderMap'
 import { useEffect } from 'react'
 import pen from '../../img/pen.png'
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import RichTextArea from "../richTextArea/RichTextArea";
 
 const PostShare = ({from}) => {
   const serverPublic = process.env.REACT_APP_PUBLIC_FOLDER;
   const loading = useSelector((state) => state.postReducer.uploading);
-  
   const [image, setImage] = useState(null);
   const [location, setLocation] = useState(null);
   const [hidden, setHidden] = useState(true)
   const imageRef = useRef();
-  const desc = useRef();
+  const [value, setValue] = useState("");
+  const getValue = (value) => {
+    setValue(value);
+  };
+
   const title = useRef();
   const { user } = useSelector((state) => state.authReducer.authData);
   const {lat, lng} = useSelector((state) => state.mapReducer)
@@ -30,7 +34,7 @@ const PostShare = ({from}) => {
   };
   const reset = () => {
     setImage(null);
-    desc.current.value = "";
+    setValue("");
   };
 
   useEffect(()=>{
@@ -48,9 +52,8 @@ const PostShare = ({from}) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    //console.dir(desc.current)
 
-    if (!user._id || !desc.current.value || !title.current.value || !location || !lat || !lng) {
+    if (!user._id || !value || !title.current.value || !location || !lat || !lng) {
       toast("🦄 Please fill all required fields", {
         position: "top-center",
         autoClose: 5000,
@@ -66,7 +69,7 @@ const PostShare = ({from}) => {
     const newPost = {
       userId: user._id,
       username: user.username,
-      desc: desc.current.value,
+      desc: value,
       title: title.current.value,
       location: location,
       lat: lat,
@@ -90,9 +93,6 @@ const PostShare = ({from}) => {
     reset();
   };
 
-//   console.log(lat, lng)
-//   console.log(location)
-
   const showTextEditor = () => {
     setHidden(prev => !prev)
   }
@@ -111,7 +111,6 @@ const PostShare = ({from}) => {
         <span onClick={showTextEditor}>Tell your story</span>
         <img src={pen} alt="" onClick={showTextEditor} />
       </div>
-      <ToastContainer />
       <div className="PostShare">
         <div>
           <div className="text-editor-wrapper" hidden={hidden}>
@@ -122,15 +121,7 @@ const PostShare = ({from}) => {
               ref={title}
               required
             />
-
-            <textarea
-              type="text"
-              placeholder="Share your story with the world"
-              ref={desc}
-              rows={10}
-              required
-              id="mytextarea"
-            />
+            <RichTextArea initialValue="" getValue={getValue} />
           </div>
           <div style={{ height: "20rem" }}>
             <GeocoderMap />
@@ -145,14 +136,14 @@ const PostShare = ({from}) => {
               <UilScenery />
               Photo
             </div>
-            <div className="option" style={{ color: "var(--video" }}>
+            {/* <div className="option" style={{ color: "var(--video" }}>
               <UilPlayCircle />
               Video
             </div>
             <div className="option" style={{ color: "var(--schedule" }}>
               <UilSchedule />
               Schedule
-            </div>
+            </div> */}
 
             <button
               className="button ps-button"

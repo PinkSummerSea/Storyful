@@ -9,6 +9,7 @@ import NF from '../../img/pngegg.png'
 import { useNavigate } from "react-router-dom";
 import Header from '../../components/header/Header';
 
+
 const NotFound = () => {
     const navigate = useNavigate();
     const handleClick = () => {

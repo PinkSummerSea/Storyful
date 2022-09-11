@@ -28,3 +28,14 @@ export const getAllPosts = () => async(dispatch) => {
 export const updateQueriedPosts = (data) => (dispatch) => {
     dispatch({type: "UPDATE_QUERIED_POSTS", data: data})
 }
+
+export const deletePost = (postId, userId) => async(dispatch) => {
+    try {
+        const {data} = await PostApi.deletePost(postId, userId)
+        console.log(data)
+        dispatch({type: 'DELETE_SUCCESS', data: data})
+    } catch (error) {
+        console.log(error)
+        dispatch({type: 'DELETE_FAIL'})
+    }
+}

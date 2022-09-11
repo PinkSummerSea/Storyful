@@ -1,20 +1,23 @@
 import './Post.css'
-import Comment from '../../img/comment.png'
-import Share from '../../img/share.png'
 import Heart from '../../img/like.png'
 import NotLike from '../../img/notlike.png'
 import {useSelector} from 'react-redux'
 import { useState } from 'react'
 import { likePost } from '../../api/PostRequest.js'
+import { deletePost } from '../../actions/PostAction'
 import { useEffect } from 'react'
 import {UilLocationPoint} from "@iconscout/react-unicons";
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import trash from "../../img/trash.png";
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 const Post = ({ data, from }) => {
   const { user } = useSelector((state) => state.authReducer.authData);
   const [liked, setLiked] = useState();
   const [likes, setLikes] = useState()
-  
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const handleLike = () => {
     likePost(data._id, user._id);
     setLiked((prev) => !prev);
@@ -26,11 +29,33 @@ const Post = ({ data, from }) => {
     setLikes(data.likes.length)
   }, [data.likes])
 
-  console.log(from)
+  const handleDelete = async () => {
+    console.log(user._id)
+    try {
+      dispatch(deletePost(data._id, user._id));
+      if(from==='story'){
+        navigate('../home')
+      }
+      toast("🦄 Post deleted", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      return;
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
-    <div className={from ==='storybook' ? 'StorybookPost' :'Post'}>
+    <div className={from === "storybook" ? "StorybookPost" : "Post"}>
+      
       <div className="detail">
-        <h3 id='short'>
+        <h3 id="short">
           <Link to={`../story/${data.userId}/${data._id}`} id="title">
             {data.title}
           </Link>
@@ -63,8 +88,15 @@ const Post = ({ data, from }) => {
           style={{ cursor: "pointer" }}
           onClick={handleLike}
         />
-        <img src={Comment} alt="" />
-        <img src={Share} alt="" />
+        { data.userId === user._id && (
+            <img
+              src={trash}
+              alt=""
+              width="25px"
+              style={{ cursor: "pointer" }}
+              onClick={handleDelete}
+            />
+        )}
       </div>
 
       <span style={{ color: "var(--gray)", fontSize: "12px" }}>

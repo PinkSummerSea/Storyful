@@ -7,6 +7,6 @@ router.post('/', createPost)
 router.get('/:id', getPost)
 router.put('/:id/like', likePost)
 router.put('/:id', updatePost)
-router.delete('/:id', deletePost)
+router.delete('/:userId/:id', deletePost)
 router.get('/:id/timeline', getTimelinePosts)
 export default router

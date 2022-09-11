@@ -63,13 +63,15 @@ export const updatePost = async (req, res) => {
 
 export const deletePost = async(req, res) => {
     const postId = req.params.id
-    const {userId} = req.body
+    const userId = req.params.userId
+    console.log('postId', postId)
+    
 
     try {
         const post = await PostModel.findById(postId)
         if(post.userId === userId) {
             await post.deleteOne()
-            res.status(200).json("Post deleted")
+            res.status(200).json(postId)
         } else {
             res.status(403).json('Access denied')
         }

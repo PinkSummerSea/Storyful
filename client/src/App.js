@@ -13,13 +13,14 @@ import Story from "./pages/story/Story";
 import NotFound from "./pages/notFound/NotFound";
 import Membership from "./pages/membership/Membership";
 import Success from "./pages/success/Success";
-
+import { ToastContainer, toast } from "react-toastify";
 function App() {
 
   const user = useSelector((state) => state.authReducer.authData)
   const location = useLocation()
   return (
     <div className="App">
+          <ToastContainer />
           <Routes>
             <Route path='/' element={<Welcome />} />
             <Route path='/home' element={user? <Home/> : <Navigate to='../auth' />} />

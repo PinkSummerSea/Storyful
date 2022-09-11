@@ -3,7 +3,7 @@ const postReducer = (state = {posts: [], loading: false, uploading: false, error
         case "UPLOAD_START":
             return {...state, uploading: true, error: false}
         case "UPLOAD_SUCCESS":
-            return {...state, posts: [action.data, ...state.posts], uploading: false, error: false}
+            return {...state, posts: [action.data, ...state.posts], allPosts: [action.data, ...state.allPosts], uploading: false, error: false}
         case "UPLOADE_FAIL":
             return {...state, uploading: false, error: true}
         case "GET_POSTS_START":
@@ -18,6 +18,10 @@ const postReducer = (state = {posts: [], loading: false, uploading: false, error
             return { ...state, loading: false, error: true };
         case "UPDATE_QUERIED_POSTS":
             return {...state, queriedPosts: action.data}
+        case "DELETE_SUCCESS":
+            return {...state, posts: state.posts.filter(p => p._id !== action.data), allPosts: state.allPosts.filter(p=>p._id!==action.data), uploading: false, error: false}
+        case "DELETE_FAIL":
+            return {...state, uploading: false, error: true}
         default:
             return state
     }

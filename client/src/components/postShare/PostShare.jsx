@@ -1,8 +1,8 @@
-import { useState, useRef, useMemo } from "react";
+import { useState, useRef } from "react";
 import './PostShare.css'
-import { UilScenery, UilPlayCircle, UilSchedule, UilTimes } from '@iconscout/react-unicons'
+import { UilScenery, UilTimes } from '@iconscout/react-unicons'
 import { useSelector, useDispatch } from 'react-redux'
-import { uploadImage, uploadPost } from '../../actions/UploadAction'
+import { uploadPost } from '../../actions/UploadAction'
 import GeocoderMap from '../geocoderMap/GeocoderMap'
 import { useEffect } from 'react'
 import pen from '../../img/pen.png'
@@ -77,19 +77,38 @@ const PostShare = ({from}) => {
     };
 
     if (image) {
-      const data = new FormData();
-      const filename = Date.now() + image.name;
-      data.append("name", filename);
-      data.append("file", image);
-      newPost.image = filename;
+      if (image.type === "image/jpeg" || image.type === "image/png") {
+        const formData = new FormData();
+        formData.append("file", image);
+        formData.append("upload_preset", "chat-app");
+        formData.append("cloud_name", "danvmjkut");
 
-      try {
-        dispatch(uploadImage(data));
-      } catch (error) {
-        console.log(error);
+        fetch("https://api.cloudinary.com/v1_1/danvmjkut/image/upload", {
+          method: "post",
+          body: formData,
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            newPost.image = data.url.toString()
+            dispatch(uploadPost(newPost));
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      } else {
+        toast("🦄 Pleas select an image", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        return;
       }
     }
-    dispatch(uploadPost(newPost));
     reset();
   };
 
@@ -103,7 +122,7 @@ const PostShare = ({from}) => {
         <img
           src={
             user.profilePicture
-              ? serverPublic + user.profilePicture
+              ? user.profilePicture
               : serverPublic + "defaultProfile2.png"
           }
           alt=""
@@ -136,14 +155,6 @@ const PostShare = ({from}) => {
               <UilScenery />
               Photo
             </div>
-            {/* <div className="option" style={{ color: "var(--video" }}>
-              <UilPlayCircle />
-              Video
-            </div>
-            <div className="option" style={{ color: "var(--schedule" }}>
-              <UilSchedule />
-              Schedule
-            </div> */}
 
             <button
               className="button ps-button"

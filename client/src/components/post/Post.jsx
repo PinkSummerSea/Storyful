@@ -70,7 +70,7 @@ const Post = ({ data, from }) => {
         )}
       </div>
       <img
-        src={data.image ? process.env.REACT_APP_PUBLIC_FOLDER + data.image : ""}
+        src={data.image ? data.image : ""}
         alt=""
       />
       <div style={{ position: "relative", marginBottom: "0.6rem" }}>

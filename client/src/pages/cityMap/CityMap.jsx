@@ -183,8 +183,7 @@ const CityMap = () => {
                       <img
                         src={
                           child.properties.postImage
-                            ? process.env.REACT_APP_PUBLIC_FOLDER +
-                              child.properties.postImage
+                            ? child.properties.postImage
                             : ""
                         }
                         alt=""
@@ -244,8 +243,7 @@ const CityMap = () => {
                   <img
                     src={
                       selectedSingle.properties.postImage
-                        ? process.env.REACT_APP_PUBLIC_FOLDER +
-                          selectedSingle.properties.postImage
+                        ? selectedSingle.properties.postImage
                         : ""
                     }
                     alt=""

@@ -51,7 +51,7 @@ const ProfileCard = ({location}) => {
           <img
             src={
               (profileUser || user).coverPicture
-                ? serverPublic + (profileUser || user).coverPicture
+                ? (profileUser || user).coverPicture
                 : serverPublic + "defaultCover.png"
             }
             alt=""
@@ -59,7 +59,7 @@ const ProfileCard = ({location}) => {
           <img
             src={
               (profileUser || user).profilePicture
-                ? serverPublic + (profileUser || user).profilePicture
+                ? (profileUser || user).profilePicture
                 : serverPublic + "defaultProfile2.png"
             }
             alt=""

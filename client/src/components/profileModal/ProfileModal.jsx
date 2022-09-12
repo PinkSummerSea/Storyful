@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import {useParams} from 'react-router-dom'
 import { updateUser } from '../../actions/UserAction.js';
 import { uploadImage } from '../../api/UploadRequest.js';
-
+import { toast } from "react-toastify";
 function ProfileModal({modalOpened, setModalOpened, data}) {
   const {password, ...other} = data
   const [formData, setFormData] = useState(other)
@@ -21,37 +21,76 @@ function ProfileModal({modalOpened, setModalOpened, data}) {
   const handleImageChange = (e) => {
     if (e.target.files && e.target.files[0]) {
       let img = e.target.files[0]
-      e.target.name === 'profilePicture' ? setProfileImage(img) : setCoverImage(img)
+      // e.target.name === 'profilePicture' ? setProfileImage(img) : setCoverImage(img)
+      if (
+        img.type === "image/jpeg" ||
+        img.type === "image/png"
+      ) {
+        const formData = new FormData();
+        formData.append("file", img);
+        formData.append("upload_preset", "chat-app");
+        formData.append("cloud_name", "danvmjkut");
+
+        fetch("https://api.cloudinary.com/v1_1/danvmjkut/image/upload", {
+          method: "post",
+          body: formData,
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data)
+            e.target.name === "profilePicture"
+              ? setProfileImage(data.url.toString())
+              : setCoverImage(data.url.toString());
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      } else {
+        toast("🦄 Pleas select an image", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        return;
+      }
     }
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
     let userData = formData
+
     if(profileImage){
-      const data = new FormData()
-      const fileName = Date.now() + profileImage.name 
-      data.append('name', fileName)
-      data.append('file', profileImage)
-      userData.profilePicture = fileName
-      try {
-        dispatch(uploadImage(data))
-      } catch (error) {
-        console.log(error)
-      }
+    //   const data = new FormData()
+    //   const fileName = Date.now() + profileImage.name 
+    //   data.append('name', fileName)
+    //   data.append('file', profileImage)
+      userData.profilePicture = profileImage
+    //   try {
+    //     dispatch(uploadImage(data))
+    //   } catch (error) {
+    //     console.log(error)
+    //   }
     }
     if(coverImage){
-      const data = new FormData()
-      const fileName = Date.now() + coverImage.name 
-      data.append('name', fileName)
-      data.append('file', coverImage)
-      userData.coverPicture = fileName
-      try {
-        dispatch(uploadImage(data))
-      } catch (error) {
-        console.log(error)
-      }
+    //   const data = new FormData()
+    //   const fileName = Date.now() + coverImage.name 
+    //   data.append('name', fileName)
+    //   data.append('file', coverImage)
+       userData.coverPicture = coverImage
+    //   try {
+    //     dispatch(uploadImage(data))
+    //   } catch (error) {
+    //     console.log(error)
+    //   }
     }
+
+
+
     dispatch(updateUser(params.id, userData))
     setModalOpened(false)
   }

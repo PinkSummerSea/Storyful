@@ -44,8 +44,7 @@ const Conversation = ({data, currentUserId, online, receiveMessage, showNoti, cu
           <img
             src={
               friendData?.profilePicture
-                ? process.env.REACT_APP_PUBLIC_FOLDER +
-                  friendData.profilePicture
+                ? friendData.profilePicture
                 : process.env.REACT_APP_PUBLIC_FOLDER + "defaultProfile2.png"
             }
             className="followerImg"

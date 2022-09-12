@@ -68,7 +68,9 @@ const CityMap = () => {
 
     const redirect = async (clusterId) => {
       const query = supercluster.getChildren(clusterId)[0].properties.postLocation
-      const { data } = await axios.get(`http://localhost:8000/post?q=${query}`);
+      const { data } = await axios.get(
+        `https://storyful.herokuapp.com/post?q=${query}`
+      );
       dispatch(
         updateQueriedPosts(data)
       );

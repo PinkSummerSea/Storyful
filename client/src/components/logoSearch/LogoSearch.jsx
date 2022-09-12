@@ -16,7 +16,9 @@ const LogoSearch = () => {
   const handleSearch = async () => {
     //query && dispatch(updateQuery(query))
     if(query) {
-      const {data} = await axios.get(`http://localhost:8000/post?q=${query}`)
+      const { data } = await axios.get(
+        `https://storyful.herokuapp.com/post?q=${query}`
+      );
       dispatch(updateQueriedPosts(data))
       navigate('../storybook', {state:{query: query}})
     }

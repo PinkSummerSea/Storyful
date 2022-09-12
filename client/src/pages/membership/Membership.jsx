@@ -2,20 +2,16 @@ import React from 'react'
 import './Membership.css'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-import { BiCheckboxSquare } from "react-icons/bi";
-import { FcApproval } from "react-icons/fc";
 import {FiCheckCircle} from 'react-icons/fi'
-import LogoSearch from "../../components/logoSearch/LogoSearch";
-import Home from "../../img/home5.png";
-import Comment from "../../img/chat.png";
-import Globe from "../../img/globe11.png";
-import { Link } from "react-router-dom";
 import Header from '../../components/header/Header';
 
 const Membership = () => {
     const navigate = useNavigate()
     const handleClick = async (type) => {
-        const {data} = await axios.post("http://localhost:8000/payment/create-checkout-session", {type: type});
+        const { data } = await axios.post(
+          "https://storyful.herokuapp.com/payment/create-checkout-session",
+          { type: type }
+        );
         const url = data.url
         window.location = url
     }

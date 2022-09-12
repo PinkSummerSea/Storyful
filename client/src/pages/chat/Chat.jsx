@@ -31,7 +31,7 @@ const Chat = () => {
     
 
     useEffect(()=>{
-        socket.current = io('http://localhost:8800')
+        socket.current = io("https://storyful.herokuapp.com/");
         socket.current.emit('new-user-add', user._id)
         socket.current.on('get-users', (activeUsers) =>  {
             setOnlineUsers(activeUsers)

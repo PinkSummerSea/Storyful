@@ -11,7 +11,6 @@ import "react-toastify/dist/ReactToastify.css";
 import RichTextArea from "../richTextArea/RichTextArea";
 
 const PostShare = ({from}) => {
-  const serverPublic = process.env.REACT_APP_PUBLIC_FOLDER;
   const loading = useSelector((state) => state.postReducer.uploading);
   const [image, setImage] = useState(null);
   const [location, setLocation] = useState(null);
@@ -123,7 +122,7 @@ const PostShare = ({from}) => {
           src={
             user.profilePicture
               ? user.profilePicture
-              : serverPublic + "defaultProfile2.png"
+              : "https://res.cloudinary.com/danvmjkut/image/upload/v1663006406/defaultProfile2_tktwrq.png"
           }
           alt=""
         />

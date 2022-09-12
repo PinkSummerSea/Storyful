@@ -43,7 +43,6 @@ const ProfileCard = ({location}) => {
    
     const posts = useSelector(state => state.postReducer.posts)
     const {allPosts} = useSelector((state) => state.postReducer);
-    const serverPublic = process.env.REACT_APP_PUBLIC_FOLDER
 
     return (
       <div className="ProfileCard">
@@ -52,7 +51,7 @@ const ProfileCard = ({location}) => {
             src={
               (profileUser || user).coverPicture
                 ? (profileUser || user).coverPicture
-                : serverPublic + "defaultCover.png"
+                : "https://res.cloudinary.com/danvmjkut/image/upload/v1663006406/defaultCover_pfkwbt.png"
             }
             alt=""
           />
@@ -60,7 +59,7 @@ const ProfileCard = ({location}) => {
             src={
               (profileUser || user).profilePicture
                 ? (profileUser || user).profilePicture
-                : serverPublic + "defaultProfile2.png"
+                : "https://res.cloudinary.com/danvmjkut/image/upload/v1663006406/defaultProfile2_tktwrq.png"
             }
             alt=""
             onClick={visitProfilePage}

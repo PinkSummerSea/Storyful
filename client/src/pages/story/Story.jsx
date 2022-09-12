@@ -12,7 +12,9 @@ const Story = () => {
     useEffect(() => {
       const getPost = async (id) => {
         try {
-          const { data } = await axios.get(`http://localhost:8000/post/${id}`);
+          const { data } = await axios.get(
+            `https://storyful.herokuapp.com/post/${id}`
+          );
           setPost(data);
         } catch (error) {
           console.log(error);

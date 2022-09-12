@@ -4,7 +4,6 @@ import { followUser, unfollowUser } from "../../actions/UserAction.js";
 import {useState} from 'react'
 import { useNavigate } from "react-router-dom";
 const User = ({person}) => {
-  const serverPublic = process.env.REACT_APP_PUBLIC_FOLDER
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const {user} = useSelector(state => state.authReducer.authData)
@@ -25,12 +24,12 @@ const User = ({person}) => {
           src={
             person.profilePicture
               ? person.profilePicture
-              : serverPublic + "defaultProfile2.png"
+              : "https://res.cloudinary.com/danvmjkut/image/upload/v1663006406/defaultProfile2_tktwrq.png"
           }
           alt=""
           className="followerImg"
           onClick={handleRedirect}
-          style={{cursor: 'pointer'}}
+          style={{ cursor: "pointer" }}
         />
         <div className="name" onClick={handleRedirect}>
           <span>

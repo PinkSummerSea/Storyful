@@ -31,7 +31,7 @@ const Conversation = ({data, currentUserId, online, receiveMessage, showNoti, cu
     <>
       <div
         className={
-          showNoti && (receiveMessage.chatId === data._id)
+          showNoti && receiveMessage.chatId === data._id
             ? "follower conversation showNoti"
             : "follower conversation"
         }
@@ -45,7 +45,7 @@ const Conversation = ({data, currentUserId, online, receiveMessage, showNoti, cu
             src={
               friendData?.profilePicture
                 ? friendData.profilePicture
-                : process.env.REACT_APP_PUBLIC_FOLDER + "defaultProfile2.png"
+                : "https://res.cloudinary.com/danvmjkut/image/upload/v1663006406/defaultProfile2_tktwrq.png"
             }
             className="followerImg"
             style={{ width: "50px", height: "50px" }}

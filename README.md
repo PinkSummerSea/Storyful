@@ -1,10 +1,22 @@
 # Storyful
 
-A full-stack social media Web app where users can post stories with precise locations, browse other users’ stories on an interactive map, and chat with anyone who shared interesting experience.
+An independent full-stack social media application built in 2022. Users can share location-based stories, explore stories on an interactive map, and chat with other users in real time.
 
-# Tech Stack:
+## Highlights
 
-Stack: MongoDB, Express, NodeJS, React, Hooks, Redux, Socket.io, Mapbox, Stripe, JavaScript, CSS, HTML
+- Create and browse location-based stories
+- Explore shared stories with an interactive Mapbox map
+- Real-time chat powered by Socket.io
+- Online payment powered by Stripe
+- Responsive React user interface
+
+## Tech Stack
+
+MongoDB, Express, Node.js, React, Redux, Socket.io, Mapbox, Stripe, JavaScript, CSS, and HTML
+
+## Demo
+
+[Watch the project demo on YouTube](https://youtu.be/VEXkMMKfSDs?si=oYVP7eDYG6gb8NKT)
 
 # Screenshots:
 <img width="600" alt="storyful0" src="https://user-images.githubusercontent.com/103772671/193527372-3b443496-dbd5-4041-983a-a97d622aec45.png">
@@ -16,7 +28,3 @@ Stack: MongoDB, Express, NodeJS, React, Hooks, Redux, Socket.io, Mapbox, Stripe,
 <img width="600" alt="storyful4" src="https://user-images.githubusercontent.com/103772671/193527391-050dd505-060c-4f09-bfda-615b5617c627.png">
 <img width="600" alt="storyful7" src="https://user-images.githubusercontent.com/103772671/193527404-f59464eb-24cd-48ce-aaa5-fe74bb04ac43.png">
 <img width="600" alt="storyful8" src="https://user-images.githubusercontent.com/103772671/193527405-b193b143-597b-443c-aed0-09c653314d98.png">
-
-# View App:
-
-https://storyful.herokuapp.com/
